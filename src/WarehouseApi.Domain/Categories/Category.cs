@@ -1,5 +1,3 @@
-using WarehouseApi.Domain.Products;
-
 namespace WarehouseApi.Domain.Categories;
 
 public class Category
