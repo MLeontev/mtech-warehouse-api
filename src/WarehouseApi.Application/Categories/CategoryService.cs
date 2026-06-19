@@ -1,4 +1,5 @@
 using CSharpFunctionalExtensions;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using WarehouseApi.Application.Categories.Dtos;
 using WarehouseApi.Application.Common;
@@ -7,7 +8,9 @@ using WarehouseApi.Domain.Common;
 
 namespace WarehouseApi.Application.Categories;
 
-internal class CategoryService(IDbContext dbContext) : ICategoryService
+internal class CategoryService(
+    IDbContext dbContext,
+    IValidator<CreateCategoryRequest> createCategoryRequestValidator) : ICategoryService
 {
     public async Task<List<CategoryResponse>> GetAll(CancellationToken cancellationToken = default)
     {
@@ -21,6 +24,10 @@ internal class CategoryService(IDbContext dbContext) : ICategoryService
         CreateCategoryRequest request, 
         CancellationToken cancellationToken = default)
     {
+        var validationResult = await createCategoryRequestValidator.ValidateAsync(request, cancellationToken);
+        if (!validationResult.IsValid)
+            return Result.Failure<CategoryResponse, Error>(validationResult.Errors.ToValidationError());
+        
         var normalizedName = request.Name.Trim();
         
         var exists = await dbContext.Categories
