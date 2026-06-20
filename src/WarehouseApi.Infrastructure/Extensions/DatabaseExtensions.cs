@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using WarehouseApi.Infrastructure.Seed;
 
-namespace WarehouseApi.Infrastructure;
+namespace WarehouseApi.Infrastructure.Extensions;
 
 public static class DatabaseExtensions
 {
