@@ -7,6 +7,6 @@ public static class CategoryErrors
     public static Error DuplicateName(string name) =>
         new(
             "Category.DuplicateName",
-            $"Категория с названием '{name}' уже существует.",
+            $"Категория с названием '{name}' уже существует",
             ErrorType.Conflict);
 }

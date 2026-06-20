@@ -1,3 +1,6 @@
 namespace WarehouseApi.Api.Contracts;
 
-public record ProblemResponse(string Title, int Status, string Detail);
+public record ProblemResponse(
+    string Title, 
+    int Status, 
+    string Detail);

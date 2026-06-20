@@ -9,4 +9,10 @@ public static class ProductErrors
             "Product.InvalidStatusTransition",
             $"Переход из статуса '{from}' в '{to}' невозможен",
             ErrorType.Conflict);
+    
+    public static Error NotFound(int id) =>
+        new(
+            "Product.NotFound",
+            $"Товар с ID={id} не найден",
+            ErrorType.NotFound);
 }
