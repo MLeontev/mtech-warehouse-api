@@ -26,6 +26,6 @@ public class ProductsController(IProductService productService) : ControllerBase
         var result = await productService.GetById(id, cancellationToken);
         return result.IsSuccess
             ? Ok(result.Value)
-            : result.Error.ToProblem();
+            : result.Error.ToProblem(this);
     }
 }

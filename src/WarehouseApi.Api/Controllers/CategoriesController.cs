@@ -24,6 +24,6 @@ public class CategoriesController(ICategoryService categoryService) : Controller
         var result = await categoryService.Create(request, cancellationToken);
         return result.IsSuccess
             ? Created()
-            : result.Error.ToProblem();
+            : result.Error.ToProblem(this);
     }
 }

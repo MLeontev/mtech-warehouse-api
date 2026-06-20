@@ -4,5 +4,4 @@ public enum ErrorType
 {
     NotFound,
     Conflict,
-    Validation
 }
