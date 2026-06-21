@@ -68,7 +68,7 @@ internal class ProductService(IDbContext dbContext) : IProductService
             .AnyAsync(x => x.Sku == normalizedSku, cancellationToken);
         
         if (skuTaken)
-            return Result.Failure<ProductResponse, Error>(ProductErrors.DuplicateSku(request.Sku));
+            return Result.Failure<ProductResponse, Error>(ProductErrors.DuplicateSku(normalizedSku));
 
         var product = new Product(request.Name, request.Sku, request.CategoryId);
 
