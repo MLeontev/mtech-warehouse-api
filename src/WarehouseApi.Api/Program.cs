@@ -27,11 +27,8 @@ app.UseExceptionHandler();
 
 await app.Services.MigrateAndSeedDatabaseAsync();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
