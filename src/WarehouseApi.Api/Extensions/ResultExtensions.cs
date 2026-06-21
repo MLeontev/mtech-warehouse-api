@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using WarehouseApi.Api.Contracts;
 using WarehouseApi.Domain.Common;
 
 namespace WarehouseApi.Api.Extensions;
