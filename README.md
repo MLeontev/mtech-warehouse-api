@@ -32,7 +32,7 @@ dotnet run --project src/WarehouseApi.Api/WarehouseApi.Api.csproj
 ```
 
 После запуска:
-* **Swagger UI** доступен по адресу: http://localhost:5072/swagger/index.html.
+* Swagger UI доступен по адресу: http://localhost:5072/swagger/index.html.
 * База данных создастся, применит миграции и заполнится стартовыми данными (3 категории и 6 товаров).
 
 ---
