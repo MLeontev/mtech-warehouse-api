@@ -39,4 +39,16 @@ public class ProductsController(IProductService productService) : ControllerBase
             ? CreatedAtAction(nameof(GetById), new { id = result.Value.Id }, result.Value)
             : result.Error.ToProblem(this);
     }
+
+    [HttpPatch("{id:int}/status")]
+    public async Task<IActionResult> UpdateStatus(
+        [FromRoute] int id,
+        [FromBody] UpdateProductStatusRequest request,
+        CancellationToken cancellationToken)
+    {
+        var result = await productService.UpdateStatus(id, request.Status!.Value, cancellationToken);
+        return result.IsSuccess
+            ? NoContent()
+            : result.Error.ToProblem(this);
+    }
 }

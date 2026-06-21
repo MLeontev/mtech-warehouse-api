@@ -8,8 +8,7 @@ using WarehouseApi.Domain.Products;
 
 namespace WarehouseApi.Application.Products;
 
-internal class ProductService(
-    IDbContext dbContext) : IProductService
+internal class ProductService(IDbContext dbContext) : IProductService
 {
     public async Task<PagedResponse<ProductResponse>> GetAll(
         GetProductsQuery query,
@@ -78,5 +77,25 @@ internal class ProductService(
         
         var response = new ProductResponse(product.Id, product.Name, product.Sku, product.CategoryId, product.Status);
         return Result.Success<ProductResponse, Error>(response);
+    }
+
+    public async Task<UnitResult<Error>> UpdateStatus(
+        int id, 
+        ProductStatus newStatus, 
+        CancellationToken cancellationToken = default)
+    {
+        var product = await dbContext.Products
+            .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+
+        if (product is null)
+            return UnitResult.Failure(ProductErrors.NotFound(id));
+
+        var result = product.ChangeStatus(newStatus);
+        if (result.IsFailure)
+            return result;
+
+        await dbContext.SaveChangesAsync(cancellationToken);
+        
+        return UnitResult.Success<Error>();
     }
 }

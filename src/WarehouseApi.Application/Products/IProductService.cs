@@ -19,4 +19,9 @@ public interface IProductService
     Task<Result<ProductResponse, Error>> Create(
         CreateProductRequest request,
         CancellationToken cancellationToken = default);
+
+    Task<UnitResult<Error>> UpdateStatus(
+        int id,
+        ProductStatus newStatus,
+        CancellationToken cancellationToken = default);
 }
