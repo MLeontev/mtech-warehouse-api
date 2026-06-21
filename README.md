@@ -1,6 +1,6 @@
 # Warehouse API
 
-Тестовое задание — REST API сервис учёта товаров на складе.
+Тестовое задание – REST API сервис учёта товаров на складе.
 
 ## Как запустить проект
 
@@ -13,8 +13,8 @@ docker compose up -d --build
 ```
 
 После запуска:
-* **Swagger UI** доступен по адресу: http://localhost:8081/swagger/index.html.
-* База данных автоматически создастся, применит миграции и заполнится стартовыми данными (3 категории и 6 товаров).
+* Swagger UI доступен по адресу: http://localhost:8081/swagger/index.html.
+* База данных создастся, применит миграции и заполнится стартовыми данными (3 категории и 6 товаров).
 
 Для остановки контейнеров:
 ```bash
@@ -25,7 +25,7 @@ docker compose down
 
 Для запуска требуется установленный .NET 10 SDK и запущенный PostgreSQL.
 
-1. Укажите вашу строку подключения к PostgreSQL в файле `src/WarehouseApi.Api/appsettings.Development.json` в секции `ConnectionStrings:DefaultConnection`.
+1. Укажите строку подключения к PostgreSQL в файле `src/WarehouseApi.Api/appsettings.Development.json` в секции `ConnectionStrings:DefaultConnection`.
 2. Запустите проект с помощью IDE или из корня репозитория:
 ```bash
 dotnet run --project src/WarehouseApi.Api/WarehouseApi.Api.csproj
@@ -33,7 +33,7 @@ dotnet run --project src/WarehouseApi.Api/WarehouseApi.Api.csproj
 
 После запуска:
 * **Swagger UI** доступен по адресу: http://localhost:5072/swagger/index.html.
-* База данных автоматически создастся, применит миграции и заполнится стартовыми данными (3 категории и 6 товаров).
+* База данных создастся, применит миграции и заполнится стартовыми данными (3 категории и 6 товаров).
 
 ---
 
@@ -41,10 +41,22 @@ dotnet run --project src/WarehouseApi.Api/WarehouseApi.Api.csproj
 
 При запуске через Docker Compose используются следующие переменные окружения:
 
-* **Для базы данных (сервис `db`):**
-  * `POSTGRES_USER` — имя пользователя БД (`postgres`)
-  * `POSTGRES_PASSWORD` — пароль пользователя БД (`postgres`)
-  * `POSTGRES_DB` — название базы данных (`warehouse`)
-* **Для веб-приложения (сервис `api`):**
-  * `ASPNETCORE_ENVIRONMENT` — окружение запуска приложения (`Development`)
-  * `ConnectionStrings__DefaultConnection` — строка подключения к PostgreSQL
+* **Для базы данных:**
+  * `POSTGRES_USER` – имя пользователя БД (`postgres`)
+  * `POSTGRES_PASSWORD` – пароль пользователя БД (`postgres`)
+  * `POSTGRES_DB` – название базы данных (`warehouse`)
+* **Для backend-сервиса:**
+  * `ASPNETCORE_ENVIRONMENT` – окружение запуска приложения (`Production`)
+  * `ConnectionStrings__DefaultConnection` – строка подключения к PostgreSQL
+
+---
+
+## Тестирование
+
+Для проверки бизнес-правил переходов статусов реализованы Unit-тесты.
+
+Для запуска тестов выполните команду в корне репозитория:
+
+```bash
+dotnet test
+```
