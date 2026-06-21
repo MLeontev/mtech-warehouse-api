@@ -9,6 +9,9 @@ public class Category
 
     public Category(string name)
     {
+        if (string.IsNullOrWhiteSpace(name))
+            throw new ArgumentException("Название категории не должно быть пустым", nameof(name));
+        
         Name = name.Trim();
     }
 }

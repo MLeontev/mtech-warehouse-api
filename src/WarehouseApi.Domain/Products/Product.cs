@@ -19,6 +19,15 @@ public class Product
 
     public Product(string name, string sku, int categoryId)
     {
+        if (string.IsNullOrWhiteSpace(name))
+            throw new ArgumentException("Название товара не должно быть пустым", nameof(name));
+        
+        if (string.IsNullOrWhiteSpace(sku))
+            throw new ArgumentException("Артикул не должен быть пустым", nameof(sku));
+        
+        if (categoryId <= 0)
+            throw new ArgumentException("ID категории должен быть больше 0", nameof(categoryId));
+        
         Name = name.Trim();
         Sku = sku.Trim().ToUpperInvariant();
         CategoryId = categoryId;
