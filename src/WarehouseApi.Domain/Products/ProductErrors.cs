@@ -13,4 +13,9 @@ public static class ProductErrors
         new(
             $"Товар с ID={id} не найден",
             ErrorType.NotFound);
+    
+    public static Error DuplicateSku(string sku) =>
+        new(
+            $"Товар с артикулом '{sku}' уже существует",
+            ErrorType.Conflict);
 }

@@ -28,4 +28,15 @@ public class ProductsController(IProductService productService) : ControllerBase
             ? Ok(result.Value)
             : result.Error.ToProblem(this);
     }
+
+    [HttpPost]
+    public async Task<IActionResult> Create(
+        CreateProductRequest request,
+        CancellationToken cancellationToken)
+    {
+        var result = await productService.Create(request, cancellationToken);
+        return result.IsSuccess
+            ? CreatedAtAction(nameof(GetById), new { id = result.Value.Id }, result.Value)
+            : result.Error.ToProblem(this);
+    }
 }

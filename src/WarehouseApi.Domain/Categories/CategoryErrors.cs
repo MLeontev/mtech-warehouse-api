@@ -8,4 +8,9 @@ public static class CategoryErrors
         new(
             $"Категория с названием '{name}' уже существует",
             ErrorType.Conflict);
+    
+    public static Error NotFound(int id) =>
+        new(
+            $"Категория с ID={id} не найдена",
+            ErrorType.NotFound);
 }

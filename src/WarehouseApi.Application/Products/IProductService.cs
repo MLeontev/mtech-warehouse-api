@@ -8,11 +8,15 @@ namespace WarehouseApi.Application.Products;
 
 public interface IProductService
 {
-    Task<Result<PagedResponse<ProductResponse>, Error>> GetAll(
+    Task<PagedResponse<ProductResponse>> GetAll(
         GetProductsQuery query,
         CancellationToken cancellationToken = default);
 
     Task<Result<ProductResponse, Error>> GetById(
         int id,
+        CancellationToken cancellationToken = default);
+
+    Task<Result<ProductResponse, Error>> Create(
+        CreateProductRequest request,
         CancellationToken cancellationToken = default);
 }
