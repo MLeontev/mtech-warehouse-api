@@ -19,8 +19,8 @@ public class Product
 
     public Product(string name, string sku, int categoryId)
     {
-        Name = name;
-        Sku = sku;
+        Name = name.Trim();
+        Sku = sku.Trim().ToUpperInvariant();
         CategoryId = categoryId;
     }
 

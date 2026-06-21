@@ -9,6 +9,6 @@ public class Category
 
     public Category(string name)
     {
-        Name = name;
+        Name = name.Trim();
     }
 }

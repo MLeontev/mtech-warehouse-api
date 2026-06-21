@@ -1,5 +1,4 @@
 using CSharpFunctionalExtensions;
-using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using WarehouseApi.Application.Categories.Dtos;
 using WarehouseApi.Application.Common;
@@ -26,7 +25,7 @@ internal class CategoryService(
         var normalizedName = request.Name.Trim();
         
         var exists = await dbContext.Categories
-            .AnyAsync(x => x.Name.ToLower() == normalizedName.ToLower(), cancellationToken: cancellationToken);
+            .AnyAsync(x => x.Name.ToLower() == normalizedName.ToLower(), cancellationToken);
         
         if (exists)
             return Result.Failure<CategoryResponse, Error>(CategoryErrors.DuplicateName(normalizedName));
